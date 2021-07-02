@@ -11,32 +11,27 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SignupPage {
 
-    @FindBy(id="inputFirstName")
-    private WebElement nFirstName;
-
-    @FindBy(id="inputLastName")
-    private WebElement nLastName;
-
-    @FindBy(id="inputUsername")
-    private WebElement nUsername;
-
-    @FindBy(id="inputPassword")
-    private WebElement nPassword;
-
-    @FindBy(id="submit-button")
-    private WebElement nSubmitButton;
-
     private final WebDriver driver;
     private final WebDriverWait wait;
+    @FindBy(id = "inputFirstName")
+    private WebElement nFirstName;
+    @FindBy(id = "inputLastName")
+    private WebElement nLastName;
+    @FindBy(id = "inputUsername")
+    private WebElement nUsername;
+    @FindBy(id = "inputPassword")
+    private WebElement nPassword;
+    @FindBy(id = "submit-button")
+    private WebElement nSubmitButton;
 
-    public SignupPage(final WebDriver driver){
-        this.driver= driver;
-        this.wait= new WebDriverWait(driver,1000);
+    public SignupPage(final WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, 1000);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("submit-button")));
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
-    public void signup(final String firstName,final String lastName,final String username,final String password){
+    public void signup(final String firstName, final String lastName, final String username, final String password) {
 
         wait.until(ExpectedConditions.elementToBeClickable(nSubmitButton));
         nFirstName.clear();
@@ -51,13 +46,12 @@ public class SignupPage {
     }
 
 
-    public boolean goLogin(){
-        try{
-            WebElement nLogin=wait.until(ExpectedConditions.elementToBeClickable(By.id("login-link")));
+    public boolean goLogin() {
+        try {
+            WebElement nLogin = wait.until(ExpectedConditions.elementToBeClickable(By.id("login-link")));
             driver.get(nLogin.getAttribute("href"));
             return true;
-        }
-        catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return false;
         }
     }

@@ -14,37 +14,37 @@ public class Note {
         this.userId = userId;
     }
 
-    public Integer getNoteId(){
+    public Integer getNoteId() {
         return noteId;
     }
 
-    public void setNoteId(Integer noteId){
-        this.noteId= noteId;
+    public void setNoteId(Integer noteId) {
+        this.noteId = noteId;
     }
 
-    public String getNoteTitle(){
+    public String getNoteTitle() {
         return noteTitle;
     }
 
-    public void setNoteTitle(String noteTitle){
-        this.noteTitle= noteTitle;
+    public void setNoteTitle(String noteTitle) {
+        this.noteTitle = noteTitle;
     }
 
-    public String getNoteDescription(){
+    public String getNoteDescription() {
         return noteDescription;
     }
 
-    public void setNoteDescription(String description){
-        this.noteDescription= noteDescription;
+    public void setNoteDescription(String description) {
+        this.noteDescription = noteDescription;
     }
 
 
-    public Integer getUserId(){
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId){
-        this.userId= userId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     @Override

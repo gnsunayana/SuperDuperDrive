@@ -15,31 +15,31 @@ public class AuthenticationService implements AuthenticationProvider {
     private UserMapper userMapper;
     private HashService hashService;
 
-    public AuthenticationService(UserMapper userMapper, HashService hashService){
-           this.userMapper= userMapper;
-           this.hashService= hashService;
+    public AuthenticationService(UserMapper userMapper, HashService hashService) {
+        this.userMapper = userMapper;
+        this.hashService = hashService;
 
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication){
-           String username= authentication.getName();
-           String password= authentication.getCredentials().toString();
+    public Authentication authenticate(Authentication authentication) {
+        String username = authentication.getName();
+        String password = authentication.getCredentials().toString();
 
-           User user = userMapper.findByUserName(username);
-           if(user != null){
-               String encodedSalt= user.getSalt();
-               String hashedPassword= hashService.getHashedValue(password,encodedSalt);
-               if(user.getPassword().equals(hashedPassword)){
-                   return new UsernamePasswordAuthenticationToken(username,password,new ArrayList<>());
-               }
-           }
+        User user = userMapper.findByUserName(username);
+        if (user != null) {
+            String encodedSalt = user.getSalt();
+            String hashedPassword = hashService.getHashedValue(password, encodedSalt);
+            if (user.getPassword().equals(hashedPassword)) {
+                return new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
+            }
+        }
 
-           return null;
+        return null;
     }
 
     @Override
-    public boolean supports(Class<?> authentication){
+    public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }

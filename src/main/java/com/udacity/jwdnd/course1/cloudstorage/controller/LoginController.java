@@ -1,8 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.PostConstruct;
@@ -12,18 +10,14 @@ import javax.annotation.PostConstruct;
 public class LoginController {
 
     @PostConstruct
-    public void postConstruct(){
-        System.out.println("LoginController has been created");
+    public void postConstruct() {
     }
 
 
     @RequestMapping
-    public String getLoginView(){
-        System.out.println("In getLoginView");
+    public String getLoginView() {
         return "login";
     }
-
-
 
 
 }

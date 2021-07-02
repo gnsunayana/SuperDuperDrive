@@ -21,40 +21,36 @@ public class NotesController {
     private final NoteService noteService;
     private final HomeController homeController;
 
-    public NotesController(NoteService noteService,HomeController homeController){
-        this.noteService= noteService;
-        this.homeController= homeController;
+    public NotesController(NoteService noteService, HomeController homeController) {
+        this.noteService = noteService;
+        this.homeController = homeController;
     }
 
     @PostConstruct
-    public void postConstruct(){
-           System.out.println("NotesController bean created");
+    public void postConstruct() {
     }
 
     @PostMapping("/note-save")
-    public String saveNote(Authentication authentication, @ModelAttribute("noteModal")Note note, @ModelAttribute("credentialModal")CredentialForm credentialForm, Model model){
+    public String saveNote(Authentication authentication, @ModelAttribute("noteModal") Note note, @ModelAttribute("credentialModal") CredentialForm credentialForm, Model model) {
 
-        System.out.println("In Save note controller method");
-        String error= null;
+        String error = null;
 
-        if(error == null && !noteService.isNoteValid(note, authentication.getName())){
-            error= "Another note with the same title exists already";
+        if (error == null && !noteService.isNoteValid(note, authentication.getName())) {
+            error = "Another note with the same title exists already";
         }
 
-        if(error == null){
-            try{
+        if (error == null) {
+            try {
                 noteService.saveNote(note, authentication.getName());
-            }
-            catch(IOException e){
-                  error= "There was an error while saving the note";
+            } catch (IOException e) {
+                error = "There was an error while saving the note";
             }
         }
 
-        if(error == null){
-            model.addAttribute("noteSavedSuccess",true);
-        }
-        else{
-            model.addAttribute("noteError",error);
+        if (error == null) {
+            model.addAttribute("noteSavedSuccess", true);
+        } else {
+            model.addAttribute("noteError", error);
         }
 
         homeController.addCommonModelAttributes(model, authentication.getName(), "notes");
@@ -66,12 +62,10 @@ public class NotesController {
 
 
     @GetMapping("/note-delete")
-    public String deleteNote(Authentication authentication, @RequestParam("noteId") Integer noteId,@ModelAttribute("noteModal")Note note,@ModelAttribute("credentialModal")CredentialForm credentialForm,Model model){
-
-        System.out.println("In NoteController Delete method");
+    public String deleteNote(Authentication authentication, @RequestParam("noteId") Integer noteId, @ModelAttribute("noteModal") Note note, @ModelAttribute("credentialModal") CredentialForm credentialForm, Model model) {
         noteService.deleteNote(noteId, authentication.getName());
-        model.addAttribute("noteDeletedSuccess",true);
-        homeController.addCommonModelAttributes(model, authentication.getName(),"notes");
+        model.addAttribute("noteDeletedSuccess", true);
+        homeController.addCommonModelAttributes(model, authentication.getName(), "notes");
         return "home";
     }
 

@@ -16,38 +16,44 @@ public class CredentialForm {
         this.encryptedPassword = encryptedPassword;
     }
 
-    public Integer getCredentialId(){
+    public Integer getCredentialId() {
         return credentialId;
     }
-    public void setCredentialId(Integer credentialId){
+
+    public void setCredentialId(Integer credentialId) {
         this.credentialId = credentialId;
     }
 
-    public String getUrl(){
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url){
-        this.url=url;
-    }
-    public String getUserName(){
-        return userName;
-    }
-    public void setUserName(String userName){
-        this.userName= userName;
-    }
-    public String getPassword(){
-        return password;
-    }
-    public void setPassword(String password){
-        this.password= password;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getEncryptedPassword(){
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEncryptedPassword() {
         return encryptedPassword;
     }
-    public void setEncryptedPassword(String encryptedPassword){
-        this.encryptedPassword= encryptedPassword;
+
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
     }
 
     @Override

@@ -14,60 +14,50 @@ import java.util.List;
 
 public class NotePageTab {
 
-    @FindBy(id="nav-notes-tab")
+    private final WebDriverWait wait;
+    @FindBy(id = "nav-notes-tab")
     private WebElement nNotesTabLink;
-
-    @FindBy(id="add-note-button")
+    @FindBy(id = "add-note-button")
     private WebElement nAddNoteButton;
-
-    @FindBy(id="note-title")
+    @FindBy(id = "note-title")
     private WebElement nModalNoteTitle;
-
-    @FindBy(id="note-description")
+    @FindBy(id = "note-description")
     private WebElement nModalNoteDesc;
-
-    @FindBy(id="note-save-button")
+    @FindBy(id = "note-save-button")
     private WebElement nModalNoteSaveButton;
-
-    @FindBy(id="note-edit-list")
+    @FindBy(id = "note-edit-list")
     private List<WebElement> nNoteEditList;
-
-    @FindBy(id="note-delete-list")
+    @FindBy(id = "note-delete-list")
     private List<WebElement> nNoteDeleteList;
-
-    @FindBy(id="note-title-list")
+    @FindBy(id = "note-title-list")
     private List<WebElement> nNoteTitleList;
-
-    @FindBy(id="note-description-list")
+    @FindBy(id = "note-description-list")
     private List<WebElement> nNoteDescriptionList;
 
-    private final WebDriverWait wait;
-
-    public NotePageTab(final WebDriver driver){
-        this.wait= new WebDriverWait(driver,1000);
+    public NotePageTab(final WebDriver driver) {
+        this.wait = new WebDriverWait(driver, 1000);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("note-save-button")));
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
 
     }
 
-    public void showNotes(){
+    public void showNotes() {
         wait.until(ExpectedConditions.elementToBeClickable(nNotesTabLink));
-        try{
+        try {
             Thread.sleep(500);
-        }
-        catch(InterruptedException e){
+        } catch (InterruptedException e) {
             System.out.println(e);
         }
         nNotesTabLink.click();
     }
 
-    public void newNote(String title,String description){
+    public void newNote(String title, String description) {
         wait.until(ExpectedConditions.elementToBeClickable(nAddNoteButton));
         nAddNoteButton.click();
-        fillNote(title,description);
+        fillNote(title, description);
     }
 
-    private void fillNote(String title,String description){
+    private void fillNote(String title, String description) {
         wait.until(ExpectedConditions.elementToBeClickable(nModalNoteSaveButton));
         nModalNoteTitle.clear();
         nModalNoteTitle.sendKeys(title);
@@ -76,41 +66,40 @@ public class NotePageTab {
         nModalNoteSaveButton.click();
     }
 
-    public boolean editNote(int index, String newTitle,String newDescription){
+    public boolean editNote(int index, String newTitle, String newDescription) {
 
-        if(nNoteEditList.size() <= index){
+        if (nNoteEditList.size() <= index) {
             return false;
         }
         wait.until(ExpectedConditions.elementToBeClickable(nNoteEditList.get(index)));
-        try{
+        try {
             Thread.sleep(1000);
-        }
-        catch(InterruptedException e){
+        } catch (InterruptedException e) {
             System.out.println(e);
         }
         nNoteEditList.get(index).click();
-        fillNote(newTitle,newDescription);
+        fillNote(newTitle, newDescription);
         return true;
     }
-    public boolean deleteNote(int index){
-        if(nNoteDeleteList.size() <= index){
+
+    public boolean deleteNote(int index) {
+        if (nNoteDeleteList.size() <= index) {
             return false;
         }
         wait.until(ExpectedConditions.elementToBeClickable(nNoteDeleteList.get(index)));
-        try{
+        try {
             Thread.sleep(1000);
-        }
-        catch(InterruptedException e){
+        } catch (InterruptedException e) {
             System.out.println(e);
         }
         nNoteDeleteList.get(index).click();
         return true;
     }
 
-    public List<Note> getNotes(){
-        final List<Note> notes= new ArrayList<>();
-        for(int i=0;i < nNoteTitleList.size();i++){
-            notes.add(new Note(null,nNoteTitleList.get(i).getText(),nNoteDescriptionList.get(i).getText(),null));
+    public List<Note> getNotes() {
+        final List<Note> notes = new ArrayList<>();
+        for (int i = 0; i < nNoteTitleList.size(); i++) {
+            notes.add(new Note(null, nNoteTitleList.get(i).getText(), nNoteDescriptionList.get(i).getText(), null));
         }
         return notes;
     }

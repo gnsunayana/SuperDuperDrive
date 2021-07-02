@@ -17,46 +17,52 @@ public class UserCredentials {
         this.userId = userId;
     }
 
-    public Integer getCredentialId(){
+    public Integer getCredentialId() {
         return credentialId;
     }
 
-    public void setCredentialId(Integer credentialId){
-        this.credentialId= credentialId;
+    public void setCredentialId(Integer credentialId) {
+        this.credentialId = credentialId;
     }
 
-    public String getUrl(){
+    public String getUrl() {
         return url;
     }
-    public void setUrl(String url){
-        this.url= url;
-    }
-    public String getUserName(){
-        return userName;
-    }
-    public void setUserName(String userName){
-        this.userName= userName;
-    }
-    public String getKey(){
-        return key;
-    }
-    public void setKey(String key){
-        this.key= key;
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getPassword(){
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password){
-        this.password= password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Integer getUserId(){
+    public Integer getUserId() {
         return userId;
     }
-    public void setUserId(Integer userId){
-        this.userId= userId;
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     @Override

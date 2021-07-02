@@ -11,36 +11,30 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage {
 
-    @FindBy(id="inputUsername")
+    private final WebDriver driver;
+    private final WebDriverWait wait;
+    @FindBy(id = "inputUsername")
     private WebElement nUserName;
-
-    @FindBy(id="inputPassword")
+    @FindBy(id = "inputPassword")
     private WebElement nPassword;
-
-    @FindBy(id="submit-button")
+    @FindBy(id = "submit-button")
     private WebElement nSubmitButton;
-
-    @FindBy(id="signup-link")
+    @FindBy(id = "signup-link")
     private WebElement nSignupLink;
 
-    private final WebDriver driver;
-
-    private final WebDriverWait wait;
-
-    public LoginPage(final WebDriver driver){
-        this.driver= driver;
-        this.wait= new WebDriverWait(driver,1000);
+    public LoginPage(final WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, 1000);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("submit-button")));
-        try{
+        try {
             Thread.sleep(500);
-        }
-        catch(InterruptedException e){
+        } catch (InterruptedException e) {
             System.out.println(e);
         }
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
-    public void login(final String username,final String password){
+    public void login(final String username, final String password) {
         wait.until(ExpectedConditions.elementToBeClickable(nSubmitButton));
         nUserName.clear();
         nUserName.sendKeys(username);
@@ -49,12 +43,12 @@ public class LoginPage {
         nSubmitButton.click();
     }
 
-    public String getLogoutMsg()throws NoSuchElementException {
-           wait.until(ExpectedConditions.presenceOfElementLocated(By.id("logout-message")));
-           return driver.findElement(By.id("logout-message")).getText();
+    public String getLogoutMsg() throws NoSuchElementException {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("logout-message")));
+        return driver.findElement(By.id("logout-message")).getText();
     }
 
-    public String getSignupMsg()throws NoSuchElementException{
+    public String getSignupMsg() throws NoSuchElementException {
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("signup-msg")));
         return driver.findElement(By.id("signup-msg")).getText();
