@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -69,13 +70,13 @@ public class UserAndAccessTests {
         assertEquals("Login", driver.getTitle());
     }
 
-
+    @Test
     public void newUserAccess() throws InterruptedException {
 
         String username = "sunayana";
         String password = "hello123";
 
-        String expectedSignupSuccessMsg = "You successfully signed up. Please log in";
+        String expectedSignupSuccessMsg = "You successfully signed up.Please login.";
 
         driver.get(baseURL + "/signup");
 
@@ -109,5 +110,9 @@ public class UserAndAccessTests {
 
 
     }
+
+
+
+
 
 }

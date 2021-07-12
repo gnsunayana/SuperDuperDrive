@@ -40,7 +40,7 @@ public class UserCredentialsService {
     }
 
     public int saveUserCredentials(final CredentialForm credentialForm, String userName) throws IOException {
-        System.out.println("In save user credentials method");
+
         int userId = userService.getUser(userName).getUserId();
 
         String key = encryptionService.generateNewKey();
@@ -51,10 +51,10 @@ public class UserCredentialsService {
         int credentialId = 0;
         if (userCredentials.getCredentialId() == null) {
             credentialId = userCredentialsMapper.addUserCredentials(userCredentials);
-            System.out.println("User credential inserted into database");
+
         } else {
             credentialId = userCredentialsMapper.updateByUser(userCredentials);
-            System.out.println("Credential updated in database");
+
         }
         if (credentialId < 1) {
             throw new IOException("Failed to insert/update credential data to database");
@@ -64,14 +64,14 @@ public class UserCredentialsService {
 
     public void deleteUserCredentials(Integer credentialId, String userName) {
 
-        System.out.println("In CredentialService delete method");
+
         int userId = userService.getUser(userName).getUserId();
         userCredentialsMapper.deleteByUser(credentialId, userId);
 
     }
 
     public List<CredentialForm> listCredentials(String userName) {
-        System.out.println("In CredentialService list method");
+
         int userId = userService.getUser(userName).getUserId();
         List<UserCredentials> credentialList = userCredentialsMapper.listByUser(userId);
         List<CredentialForm> credentialFormList = new ArrayList<CredentialForm>();

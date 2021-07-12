@@ -7,6 +7,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -42,7 +43,7 @@ public class NotesAppTests {
 
         driver.get(baseURL + "/login");
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("d", "1");
+        loginPage.login("default", "abc123");
     }
 
     @AfterEach
@@ -52,8 +53,9 @@ public class NotesAppTests {
         }
     }
 
+    @Test
     public void createNote() {
-        String title = "Testing note creation";
+        String title = "Testing note create";
         String description = "//Write a test that creates a note,\n and verifies it is displayed";
         NotePageTab notePageTab = new NotePageTab(driver);
         notePageTab.showNotes();
@@ -66,9 +68,9 @@ public class NotesAppTests {
 
     }
 
-
+    @Test
     public void editNote() {
-        String title = "Test Note Creation";
+        String title = "Test Note Create";
         String description = "//Write a test that creates a note,\n and verifies it is displayed";
         String newTitle = "Test Note Editing";
         String newDescription = "// Write a test that edits an existing note\n and verifies that the changes are displayed";
@@ -83,6 +85,7 @@ public class NotesAppTests {
         assertEquals(newDescription.replace("\n", ""), notes.get(0).getNoteDescription());
     }
 
+    @Test
     public void deleteNote() {
         String title = "Test Note Deletion";
         String description = "// Write a test that deletes a note\n and verifies that the note is no longer displayed";

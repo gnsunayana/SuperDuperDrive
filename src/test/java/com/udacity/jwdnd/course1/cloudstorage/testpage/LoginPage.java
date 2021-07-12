@@ -21,6 +21,8 @@ public class LoginPage {
     private WebElement nSubmitButton;
     @FindBy(id = "signup-link")
     private WebElement nSignupLink;
+    @FindBy(id = "login-form-container")
+    private WebElement formContainer;
 
     public LoginPage(final WebDriver driver) {
         this.driver = driver;
@@ -52,6 +54,35 @@ public class LoginPage {
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("signup-msg")));
         return driver.findElement(By.id("signup-msg")).getText();
+    }
+
+    public void setUserName(String username){
+        nUserName.clear();
+        nUserName.sendKeys(username);
+    }
+
+    public void setPassword(String password){
+        nPassword.clear();
+        nPassword.sendKeys(password);
+    }
+
+    public void submit(){
+        nSubmitButton.click();
+    }
+
+    public Boolean success(){
+        return !hasErrorMessage();
+    }
+
+    private boolean hasErrorMessage(){
+        boolean hasError = false;
+        try{
+            hasError =formContainer.findElements(By.id("invalid-credentials-message")).size() !=0;
+        }
+        catch(Exception ignored){
+
+        }
+        return hasError;
     }
 
 }

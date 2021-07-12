@@ -34,6 +34,7 @@ public class NotesController {
     public String saveNote(Authentication authentication, @ModelAttribute("noteModal") Note note, @ModelAttribute("credentialModal") CredentialForm credentialForm, Model model) {
 
         String error = null;
+        Boolean updateOrAdd = null;
 
         if (error == null && !noteService.isNoteValid(note, authentication.getName())) {
             error = "Another note with the same title exists already";
@@ -41,6 +42,12 @@ public class NotesController {
 
         if (error == null) {
             try {
+                if(note.getNoteId() != null){
+                    updateOrAdd = true;
+                }
+                else{
+                    updateOrAdd = false;
+                }
                 noteService.saveNote(note, authentication.getName());
             } catch (IOException e) {
                 error = "There was an error while saving the note";
@@ -48,7 +55,13 @@ public class NotesController {
         }
 
         if (error == null) {
-            model.addAttribute("noteSavedSuccess", true);
+            if(updateOrAdd){
+                model.addAttribute("noteUpdatedSuccess", true);
+            }
+            else{
+                model.addAttribute("noteSavedSuccess", true);
+            }
+           
         } else {
             model.addAttribute("noteError", error);
         }

@@ -76,7 +76,7 @@
                             <td>
                                 <a class="btn btn-success" target="_blank"
                                    th:href="@{/file-download(fileId=${file.fileId})}">View</a>
-                                <a target="btn btn-danger" th:href="@{file-delete(fileId=${file.fileId})}">Delete</a>
+                                <a class="btn btn-danger" th:href="@{/file-delete(fileId=${file.fileId})}">Delete</a>
                             </td>
                             <th scope="row" th:text="${file.fileName}"></th>
                         </tr>
@@ -94,6 +94,9 @@
                 <div class="table-responsive">
                     <div class="alert alert-dark" th:if="${noteSavedSuccess}">
                         <span>Note Saved successfully</span>
+                    </div>
+                    <div class="alert alert-dark" th:if="${noteUpdatedSuccess}">
+                        <span>Note Updated successfully</span>
                     </div>
                     <div class="alert alert-dark" th:if="${noteDeletedSuccess}">
                         <span>Note Deleted Successfully</span>
@@ -121,7 +124,7 @@
                                 <a class="btn btn-danger" id="note-delete-list"
                                    th:href="@{/note-delete(noteId=${note.noteId})}">Delete</a>
                             </td>
-                            <th id="note-title-list" scope="row" th:next="${note.noteTitle}">Example Note Title</th>
+                            <th id="note-title-list" scope="row" th:text="${note.noteTitle}">Example Note Title</th>
                             <td id="note-description-list" th:text="${note.noteDescription}">Example Note Description
                             </td>
 
@@ -180,6 +183,9 @@
                     <div class="alert alert-dark" th:if="${credentialSavedSuccess}">
                         <span>Credential saved successfully</span>
                     </div>
+                    <div class="alert alert-dark" th:if="${credentialUpdatedSuccess}">
+                        <span>Credential updated successfully</span>
+                    </div>
                     <div class="alert alert-dark" th:if="${credentialDeletedSuccess}">
                         <span>Credential deleted successfully</span>
                     </div>
@@ -237,18 +243,18 @@
                                     <input id="credential-id" name="credentialId" th:field="*{credentialId}"
                                            type="hidden">
                                     <div class="form-group">
-                                        <label class="col-form-label" for="url">URL</label>
-                                        <input class="form-control" id="url" maxlength="100" name="url"
-                                               required th:field="*{url}" type="text">
+                                        <label for="url" class="col-form-label">URL</label>
+                                        <input type="text" name="url" class="form-control" id="credential-url"
+                                               th:field="*{url}" maxlength="100" required>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-form-label" for="username">Username</label>
-                                        <input class="form-control" id="username" maxlength="30" name="username"
+                                        <input class="form-control" id="credential-username" maxlength="30" name="username"
                                                required th:field="*{userName}" type="text">
                                     </div>
                                     <div class="form-group">
                                         <label class="col-form-label" for="password">Password</label>
-                                        <input class="form-control" id="password" maxlength="30" name="password"
+                                        <input class="form-control" id="credential-password" maxlength="30" name="password"
                                                required th:field="*{password}" type="text">
                                     </div>
                                     <button class="d-none" id="credentialSubmit" type="submit"></button>
@@ -286,7 +292,7 @@
             function showCredentialModal(credentialId,url,userName,password){
                 $('#credential-id').val(credentialId ? credentialId : '');
                 $('#credential-url').val(url ? url : '');
-                $('#credential-userName').val(userName ? userName : '');
+                $('#credential-username').val(userName ? userName : '');
                 $('#credential-password').val(password ? password : '');
                 $('#credentialModal').modal('show');
             }

@@ -26,14 +26,14 @@ public class SignupPage {
 
     public SignupPage(final WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 1000);
+        this.wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("submit-button")));
         PageFactory.initElements(driver, this);
     }
 
     public void signup(final String firstName, final String lastName, final String username, final String password) {
 
-        wait.until(ExpectedConditions.elementToBeClickable(nSubmitButton));
+        //wait.until(ExpectedConditions.elementToBeClickable(nSubmitButton));
         nFirstName.clear();
         nFirstName.sendKeys(firstName);
         nLastName.clear();
